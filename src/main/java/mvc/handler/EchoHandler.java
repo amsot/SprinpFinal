@@ -8,13 +8,18 @@ import java.util.Map;
 import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import mvc.dto.ChatDto;
+import mvc.service.ChatService;
  
 
- 
+
 public class EchoHandler extends TextWebSocketHandler {
 	 
     private Logger logger = LoggerFactory.getLogger(EchoHandler.class);
@@ -22,6 +27,9 @@ public class EchoHandler extends TextWebSocketHandler {
     /**
      * 서버에 연결한 사용자들을 저장하는 리스트
      */
+
+    
+    ChatDto dto = new ChatDto();
     private List<WebSocketSession> connectedUsers;
     private Map<String,List<WebSocketSession>> chatRoom;
     private List<String> chatRoomList;
@@ -79,7 +87,8 @@ public class EchoHandler extends TextWebSocketHandler {
  
         Map<String,Object> map = session.getAttributes();
         String chatRoom_id = (String)map.get("chatRoom");
-        
+
+  
         for (WebSocketSession webSocketSession : chatRoom.get(chatRoom_id)) {
                 if (!session.getAttributes().get("id").equals(webSocketSession.getAttributes().get("id"))) {
                     webSocketSession.sendMessage(new TextMessage(session.getAttributes().get("id") + " ▶ " + message.getPayload()));
