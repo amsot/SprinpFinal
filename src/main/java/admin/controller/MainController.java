@@ -31,7 +31,7 @@ public class MainController {
 	 */
 	@RequestMapping(value="/admin/main.do", method=RequestMethod.GET)
 	public void main() {
-		meetService.updateMeetList();
+		
 	}
 	
 	/**
