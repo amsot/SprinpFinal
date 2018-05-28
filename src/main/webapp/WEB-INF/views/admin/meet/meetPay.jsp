@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- side menu -->
+<jsp:include page="/WEB-INF/views/admin/side/meetSide.jsp"/>
 
 
 </body>

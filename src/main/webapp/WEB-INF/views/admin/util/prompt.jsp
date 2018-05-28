@@ -5,9 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<!-- 제이쿼리  선언, 코드-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!-- 제이쿼리 끝 -->
+<script type="text/javascript">
+	
+</script>
+
 </head>
 <body>
-
 
 </body>
 </html>

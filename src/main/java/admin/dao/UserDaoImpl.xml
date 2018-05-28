@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin.dao.UserDao">
+
+	<!-- ★ db 이름 : USERS ★ -->
+	
+	<select id="selectAllUser" resultType="admin.dto.User">
+		SELECT * FROM USERS
+	</select>
+	
+	<select id="getDetail" resultType="admin.dto.User">
+		SELECT * FROM USERS WHERE u_no = #{u_no}
+	</select>
+	
+	<delete id="deleteUser">
+		DELETE FROM USERS WHERE u_no = #{u_no}
+	</delete>
+	
+	<select id="getUserTotal" resultType="int">
+		SELECT COUNT(*) FROM USERS
+	</select>
+	
+	<select id="getUserPagingList" parameterType="admin.util.Paging" resultType="admin.dto.User">
+		 SELECT * FROM (SELECT rownum u_list_no, b.* FROM (SELECT * FROM USERS WHERE U_BLACK = 1 ORDER BY u_no ) b ORDER BY u_list_no DESC) WHERE u_list_no BETWEEN #{startNo} AND #{endNo} 
+	</select>
+	
+	<update id="stopUser" parameterType="admin.dto.User">
+		UPDATE USERS SET U_BLACK = 0 WHERE U_NO = #{u_no}  
+	
+	</update>
+	
+	<update id="noStop" parameterType="admin.dto.User">
+		UPDATE USERS SET U_BLACK = 1 WHERE U_NO = #{u_no}
+	</update>
+	
+	<select id="getBlackList" resultType="admin.dto.User">
+		SELECT * FROM (SELECT rownum u_list_no, b.* FROM (SELECT * FROM USERS WHERE U_BLACK = 0 ORDER BY u_no ) b ORDER BY u_list_no DESC) WHERE u_list_no BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+	<select id="getBlackTotal" resultType="int">
+		SELECT COUNT(*) FROM USERS WHERE U_BLACK = 0
+	</select>
+
+</mapper>

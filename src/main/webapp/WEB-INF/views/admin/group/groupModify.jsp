@@ -7,7 +7,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="content">
+<!-- side menu -->
+<div class="side">
+<jsp:include page="/WEB-INF/views/admin/side/groupSide.jsp"/>
+</div>
+<div class="main">
+	<h3>모임 수정</h3>
+	<hr>
 
 
+</div>
+
+
+</div>
 </body>
 </html>

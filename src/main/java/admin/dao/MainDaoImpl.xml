@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="admin.dao.MainDao">
+ 	<!-- 디비 이름 : admin_board -->
+ 
+	<insert id="mainNoticeInsert" parameterType="admin.dto.Board">
+		INSERT INTO admin_board (board_no,board_writer,board_title,board_content,board_type,board_file,board_regdate)
+		VALUES (admin_boardseq.nextval,#{board_writer},#{board_title},#{board_content},#{board_type},#{board_file},sysdate)
+	</insert>
+	
+	<select id="getNoticeTotal" resultType="int">
+		SELECT COUNT(*) FROM admin_board 
+	</select>
+	
+	<select id="getPagingNoticeList" parameterType="admin.util.Paging" resultType="admin.dto.Board">
+		SELECT * FROM (SELECT rownum board_list_no, b.* FROM (SELECT * FROM admin_board ORDER BY board_NO  ) b ORDER BY board_list_no DESC) WHERE board_list_no BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+	<select id="getNoticeDetail" parameterType="admin.dto.Board" resultType="admin.dto.Board">
+		SELECT * FROM admin_board WHERE board_no = #{board_no}
+	</select>
+	
+	<update id="mainNoticeModify" parameterType="admin.dto.Board">
+		UPDATE admin_board SET board_title = #{board_title} , board_content = #{board_content} WHERE board_no = #{board_no}
+	</update>
+	
+	<delete id="mainNoticeDelete" parameterType="admin.dto.Board">
+		DELETE FROM admin_board WHERE board_no = #{board_no}
+	</delete>
+
+ </mapper>

@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- side menu -->
+<jsp:include page="/WEB-INF/views/admin/side/companySide.jsp"/>
+
+
 
 
 </body>
