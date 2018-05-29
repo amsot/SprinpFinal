@@ -1,5 +1,7 @@
 package mvc.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +25,9 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public ChatDto selectChat(ChatDto dto) {
-		System.out.println("7777");
-		dto = dao.selectChat(dto);
-		System.out.println("8888");
-		return dto;
+	public List<ChatDto> selectChat(String chatRoom) {
+		
+		return dao.selectChat(chatRoom);
 	}
 
 }

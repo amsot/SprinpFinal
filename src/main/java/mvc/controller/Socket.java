@@ -9,10 +9,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.socket.WebSocketSession;
 
 import mvc.dao.ChatDao;
@@ -41,7 +43,7 @@ public class Socket {
 		return "chatting/login";
 	}
 	@RequestMapping("/chat")
-	public String viewChattingPage(String id,String chatRoom, HttpSession session) {
+	public ModelAndView viewChattingPage(String id,String chatRoom, HttpSession session) {
 
 		session.setAttribute("id", id);
 		session.setAttribute("chatRoom", chatRoom);
@@ -63,8 +65,19 @@ public class Socket {
 				session.setAttribute("userLiest", chatRoomUser.get(chat_id));
 			}
 		}
-
-		return "chatting/chat";
+		
+		
+		ModelAndView view = new ModelAndView();
+		List<ChatDto> list = new ArrayList<ChatDto>();
+		
+		list = s.selectChat((String)session.getAttribute("chatRoom"));
+		
+		
+		view.setViewName("chatting/chat");
+		
+		view.addObject("chatlist", list);
+		
+		return view;
 	}
 	
 	@ResponseBody
