@@ -16,7 +16,7 @@
     var chatSock = null;
  
     $(document).ready(function(){
-         
+    	$("#chatMessage").scrollTop(99999999);
         chatSock = new SockJS("/echo-ws");
          
         chatSock.onopen = function() {
@@ -162,7 +162,7 @@
                     success: function(res) {
                     	var str = "";
                     	<c:forEach items="${sessionScope.userLiest}" var="list">
-            				str +=${list} +"</br>"
+            				str +="${list} </br>"
                     	</c:forEach>
             				 $("#userList").html(str);;
 						console.log(res.stored);
@@ -187,7 +187,16 @@
 	<input type="button" id="sendMessage" value="엔터" />
 	<input type="text" id="message" placeholder="메시지 내용" />
 	<div id="chatMessage"
-		style="overFlow: auto; width: 700px; height: 500px; border: 1px solid black;"></div>
+		style="overFlow: auto; width: 700px; height: 500px; border: 1px solid black;">
+	   			<c:forEach items="${chatlist}" var="list">
+	   				<c:if test="${list.getUESR_ID() ne sessionScope.id}">
+    					${list.getUESR_ID()} ▶  ${list.getChat_content()}<br>
+    				</c:if>
+    				<c:if test="${list.getUESR_ID() eq sessionScope.id}">
+    					나  ->  ${list.getChat_content()}<br>
+    				</c:if>
+            	</c:forEach>
+		</div>
 	<div>
 		<span>유저 목록</span>
 		<div id="userList"
