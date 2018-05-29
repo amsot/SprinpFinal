@@ -22,7 +22,7 @@
         chatSock.onopen = function() {
         	var str = "";
         	<c:forEach items="${sessionScope.userLiest}" var="list">
-				str +=${list} +"</br>"
+				str +="${list} </br>"
         	</c:forEach>
 				 $("#userList").html(str);
         
@@ -32,7 +32,7 @@
         chatSock.onmessage = function(evt) {
         	var str = "";
         	<c:forEach items="${sessionScope.userLiest}" var="list">
-				str +=${list} +"</br>"
+				str +="${list}</br>"
         	</c:forEach>
 				 $("#userList").html(str);
             $("#chatMessage").append(evt.data+"<br />");
@@ -43,7 +43,7 @@
         
            	var str = "";
         	<c:forEach items="${sessionScope.userLiest}" var="list">
-				str +=${list} +"</br>"
+				str +="${list}</br>"
         	</c:forEach>
 				 $("#userList").html(str);
             sock.send("채팅을 종료합니다.");
@@ -56,11 +56,24 @@
                  	var str = "";
                  	
                 	<c:forEach items="${sessionScope.userLiest}" var="list">
-        				str +=${list} +"</br>"
+        				str +="${list}</br>"
                 	</c:forEach>
         			$("#userList").html(str);
         				 
                  chatSock.send($("#message").val());
+  
+                 var message = $("#message").val();
+                 $.ajax({
+                     url: "/chat/db",
+                     method: 'POST',
+                     data: message,
+                     dataType: 'json',
+                     contentType: "application/json; charset=UTF-8",
+                     success: function(res) {
+						console.log("성공");
+                     }
+                  });
+                 
                  $("#chatMessage").append("나 ->  " + $("#message").val() + "<br/>");
                  $("#chatMessage").scrollTop(99999999);
 
@@ -74,10 +87,23 @@
             if( $("#message").val() != "") {
             	var str = "";
             	<c:forEach items="${sessionScope.userLiest}" var="list">
-    				str +=${list} +"</br>"
+    				str +="${list}</br>"
             	</c:forEach>
     				 $("#userList").html(str);
                 chatSock.send($("#message").val());
+                
+                var message = $("#message").val();
+                $.ajax({
+                    url: "/chat/db",
+                    method: 'POST',
+                    data: message,
+                    dataType: 'json',
+                    contentType: "application/json; charset=UTF-8",
+                    success: function(res) {
+						console.log("성공");
+                    }
+                 });
+                
                 $("#chatMessage").append("나 ->  " + $("#message").val() + "<br/>");
                 $("#chatMessage").scrollTop(99999999);
 

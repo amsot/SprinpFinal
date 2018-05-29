@@ -27,7 +27,6 @@
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 		<property name="mapperLocations">
 			<list>
-
 				<value>classpath:/admin/dao/*DaoImpl.xml</value>
 				<value>classpath:/mvc/dao/*DaoImpl.xml</value>
 			</list>
@@ -35,12 +34,8 @@
 
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" >
-			<list>
-				<value>admin.dao</value>
-				<value>mvc.dao</value>
-			</list>
-		</property>
+		<property name="basePackage" value="admin.dao,mvc.dao"/>
+
 	</bean>
 
 	
