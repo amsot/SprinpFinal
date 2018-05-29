@@ -5,7 +5,11 @@
   <mapper namespace="mvc.dao.ChatDao">
   
 	  <insert id="insertChat" parameterType="mvc.dto.ChatDto">
-	  		insert into chat(chat_no,chat_content,chatroom_id,uesr_no) values(chat_no = chat_seq.nextval,chat_content = #{chat_content},chatroom_id = #{chatroom_id},uesr_no = #{uesr_no});
+	  		insert into chat(chat_no,chat_content,chatroom_id,UESR_ID)
+	  		values(chat_seq.nextval,#{chat_content},#{chatroom_id},#{UESR_ID})
 	  </insert>
+	  <select id="selectChat" resultType="mvc.dto.ChatDto">
+	  	select * from chat where chat_no = 1
+	  </select>
   
   </mapper>
