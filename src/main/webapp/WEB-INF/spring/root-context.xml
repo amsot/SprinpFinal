@@ -27,14 +27,26 @@
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 		<property name="mapperLocations">
 			<list>
+<<<<<<< HEAD
+				<value>classpath:/mvc/dao/*DaoImpl.xml</value>
+				<value>classpath:/admin/dao/*DaoImpl.xml</value>
+			</list>
+		</property>
+=======
 				<value>classpath:/admin/dao/*DaoImpl.xml</value>
 				<value>classpath:/mvc/dao/*DaoImpl.xml</value>
 			</list>
 		</property>
 		
+>>>>>>> refs/remotes/origin/jihyun
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="admin.dao,mvc.dao"></property>
+		<property name="basePackage" >
+			<list>
+				<value>admin.dao</value>
+				<value>mvc.dao</value>
+			</list>
+		</property>
 	</bean>
 
 	
