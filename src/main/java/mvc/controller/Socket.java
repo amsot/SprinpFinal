@@ -42,6 +42,10 @@ public class Socket {
 	public String login() {
 		return "chatting/login";
 	}
+	@RequestMapping("/chatTap")
+	public String chatTap() {
+		return "chatting/chatTap";
+	}
 	@RequestMapping("/chat")
 	public ModelAndView viewChattingPage(String id,String chatRoom, HttpSession session) {
 

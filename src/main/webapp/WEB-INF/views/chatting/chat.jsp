@@ -63,16 +63,7 @@
                  chatSock.send($("#message").val());
   
                  var message = $("#message").val();
-                 $.ajax({
-                     url: "/chat/db",
-                     method: 'POST',
-                     data: message,
-                     dataType: 'json',
-                     contentType: "application/json; charset=UTF-8",
-                     success: function(res) {
-						console.log("성공");
-                     }
-                  });
+                 sendAjax(message);
                  
                  $("#chatMessage").append("나 ->  " + $("#message").val() + "<br/>");
                  $("#chatMessage").scrollTop(99999999);
@@ -93,16 +84,7 @@
                 chatSock.send($("#message").val());
                 
                 var message = $("#message").val();
-                $.ajax({
-                    url: "/chat/db",
-                    method: 'POST',
-                    data: message,
-                    dataType: 'json',
-                    contentType: "application/json; charset=UTF-8",
-                    success: function(res) {
-						console.log("성공");
-                    }
-                 });
+          		sendAjax(message);
                 
                 $("#chatMessage").append("나 ->  " + $("#message").val() + "<br/>");
                 $("#chatMessage").scrollTop(99999999);
@@ -168,6 +150,9 @@
 						console.log(res.stored);
 						chatSock.send("<img style=\"width: 200px;height: 200px\" src=\"/resources/img/"+res.stored+"\"><br/>");
                     	 $("#chatMessage").append("나 ->  <img style=\"width: 200px;height: 200px\" src=\"/resources/img/"+res.stored+"\"><br/>");
+                    	 var message = "<img style=\"width: 200px;height: 200px\" src=\"/resources/img/"+res.stored+"\"><br/>";
+                    	 sendAjax(message);
+                    	 $("#chatMessage").scrollTop(99999999);
                     }
                  });
              }
@@ -178,12 +163,29 @@
              for(var i=0; i < files.length; i++)
                  console.log(files[i].file_nm + " - " + files[i].file_size);
         }
-    
+        
+       function sendAjax(message){
+           $.ajax({
+               url: "/chat/db",
+               method: 'POST',
+               data: message,
+               dataType: 'json',
+               contentType: "application/json; charset=UTF-8",
+               success: function(res) {
+					console.log("성공");
+               }
+            });
+       }
+
 </script>
 
 
 </head>
 <body>
+<div role="tabpanel">
+
+
+	</div>
 	<input type="button" id="sendMessage" value="엔터" />
 	<input type="text" id="message" placeholder="메시지 내용" />
 	<div id="chatMessage"
