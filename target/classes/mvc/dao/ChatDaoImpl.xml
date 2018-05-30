@@ -6,7 +6,7 @@
   
 	  <insert id="insertChat" parameterType="mvc.dto.ChatDto">
 	  		insert into chat(chat_no,chat_content,chatroom_id,UESR_ID)
-	  		values(chat_seq.nextval,#{chat_content},#{chatroom_id},#{UESR_ID})
+	  		values(LPAD(chat_seq.nextval, 8, '0'),#{chat_content},#{chatroom_id},#{UESR_ID})
 	  </insert>
 	  <select id="selectChat" resultType="mvc.dto.ChatDto" parameterType="String">
 	  	select * from chat where chatRoom_id = #{chatRoom} order by chat_no asc
