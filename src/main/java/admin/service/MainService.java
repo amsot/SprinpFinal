@@ -25,10 +25,11 @@ public interface MainService {
 	
 	/**
 	 * 
+	 * @param search 
 	 * @return int
 	 * 공지사항 글 갯수 가져오기
 	 */
-	public int getNoticeTotal();
+	public int getNoticeTotal(Paging search);
 	/**
 	 * 
 	 * @param paging

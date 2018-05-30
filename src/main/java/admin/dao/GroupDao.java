@@ -7,7 +7,7 @@ import admin.util.Paging;
 
 public interface GroupDao {
 
-	public int getGroupTotal();
+	public int getGroupTotal(Paging search);
 
 	public List getGroupPagingList(Paging paging);
 

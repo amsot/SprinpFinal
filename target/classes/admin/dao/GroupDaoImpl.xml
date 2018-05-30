@@ -7,12 +7,20 @@
 	<!-- ★ db 이름 : groups ★ -->
 	<!-- ★ 그룹 제재 db 이름 : blocked_group ★ -->
 	
-	<select id="getGroupTotal" resultType="int">
+	<select id="getGroupTotal" parameterType="admin.util.Paging" resultType="int" >
 		SELECT COUNT(*) FROM GROUPS
+		<if test="search != null">
+			WHERE group_id Like '%'|| #{search} || '%'
+		</if>
 	</select>
 	
 	<select id="getGroupPagingList" parameterType="admin.util.Paging" resultType="admin.dto.Group">
-		SELECT * FROM (SELECT rownum group_list_no, b.* FROM (SELECT * FROM GROUPS ORDER BY GROUP_NO DESC ) b ORDER BY group_list_no DESC) WHERE group_list_no BETWEEN #{startNo} AND #{endNo}
+		SELECT * FROM (SELECT rownum group_list_no, b.* FROM (SELECT * FROM GROUPS
+		<if test="search != null">
+			WHERE group_id Like '%'|| #{search} || '%'
+		</if>
+		 ORDER BY GROUP_NO DESC ) b ORDER BY group_list_no DESC) WHERE group_list_no BETWEEN #{startNo} AND #{endNo}
+		
 	</select>
 	
 	<select id="getGroupDetail" parameterType="admin.dto.Group" resultType="admin.dto.Group">

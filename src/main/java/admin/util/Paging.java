@@ -48,6 +48,7 @@ public class Paging {
 		
 		makePaging();
 	}
+	
 
 	// 총 게시글 수와 현재 페이지, 보여지는 게시글 수, 페이지 수를 입력하는 생성자
 	//	listCount == 10

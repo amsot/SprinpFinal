@@ -18,12 +18,20 @@
 		DELETE FROM USERS WHERE u_no = #{u_no}
 	</delete>
 	
-	<select id="getUserTotal" resultType="int">
-		SELECT COUNT(*) FROM USERS
+	<select id="getUserTotal" resultType="int" parameterType="admin.util.Paging">
+		SELECT COUNT(*) FROM USERS WHERE u_black = 1
+		<if test="search !=null">
+			AND u_id Like '%' || #{search} || '%' 
+		</if>
 	</select>
 	
 	<select id="getUserPagingList" parameterType="admin.util.Paging" resultType="admin.dto.User">
-		 SELECT * FROM (SELECT rownum u_list_no, b.* FROM (SELECT * FROM USERS WHERE U_BLACK = 1 ORDER BY u_no ) b ORDER BY u_list_no DESC) WHERE u_list_no BETWEEN #{startNo} AND #{endNo} 
+		 SELECT * FROM (SELECT rownum u_list_no, b.* FROM (SELECT * FROM USERS 
+		 WHERE U_BLACK = 1 
+		 <if test="search != null">
+		 AND u_id Like '%' || #{search} || '%' 
+		 </if>
+		 ORDER BY u_no ) b ORDER BY u_list_no DESC) WHERE u_list_no BETWEEN #{startNo} AND #{endNo} 
 	</select>
 	
 	<update id="stopUser" parameterType="admin.dto.User">
@@ -35,12 +43,19 @@
 		UPDATE USERS SET U_BLACK = 1 WHERE U_NO = #{u_no}
 	</update>
 	
-	<select id="getBlackList" resultType="admin.dto.User">
-		SELECT * FROM (SELECT rownum u_list_no, b.* FROM (SELECT * FROM USERS WHERE U_BLACK = 0 ORDER BY u_no ) b ORDER BY u_list_no DESC) WHERE u_list_no BETWEEN #{startNo} AND #{endNo}
+	<select id="getBlackList" parameterType="admin.util.Paging" resultType="admin.dto.User">
+		SELECT * FROM (SELECT rownum u_list_no, b.* FROM (SELECT * FROM USERS WHERE U_BLACK = 0
+		<if test="search != null">
+		AND u_id Like '%' || #{search} || '%'
+		</if>
+		ORDER BY u_no ) b ORDER BY u_list_no DESC) WHERE u_list_no BETWEEN #{startNo} AND #{endNo}
 	</select>
 	
-	<select id="getBlackTotal" resultType="int">
+	<select id="getBlackTotal" parameterType="admin.util.Paging" resultType="int">
 		SELECT COUNT(*) FROM USERS WHERE U_BLACK = 0
+		<if test="search != null">
+			AND u_id Like '%' || #{search} || '%'
+		</if>		
 	</select>
 
 </mapper>

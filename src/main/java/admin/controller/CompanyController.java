@@ -25,16 +25,21 @@ public class CompanyController {
 	/**
 	 *  제휴 업체 목록
 	 */
-	@RequestMapping(value="/admin/company/companyList.do")
-	public void companyList(@RequestParam(defaultValue="0")int curPage,Model model) {
-		int total = companyService.getCompanyTotal();
-		System.out.println(total);
+	@RequestMapping(value="/admin/company/companyList.do",method=RequestMethod.GET)
+	public void companyList(@RequestParam(defaultValue="0")int curPage,Model model,Paging search) {
+		int total = companyService.getCompanyTotal(search);
+		System.out.println("컴퍼니 갯수 "+total);
 		
 		Paging paging = new Paging(total,curPage);
-		System.out.println(paging);
-		model.addAttribute("paging", paging);
+		
+		paging.setSearch(search.getSearch());
 		
 		List companyList = companyService.getCompanyPagingList(paging);
+		
+		model.addAttribute("search", search.getSearch());
+		//search로 그냥 보내면 모든 정보가 같이 url에 출력됨.
+		
+		model.addAttribute("paging", paging);
 		model.addAttribute("companyList", companyList);
 	}
 	
@@ -171,15 +176,18 @@ public class CompanyController {
 	/**
 	 *  제휴 업체 장소 리스트
 	 */
-	@RequestMapping(value="/admin/company/companyBoard.do")
-	public void companyBoard(@RequestParam(defaultValue="0")int curPage, Model model) {
-		int total = companyService.getPlaceTotal();
+	@RequestMapping(value="/admin/company/companyBoard.do",method=RequestMethod.GET)
+	public void companyBoard(@RequestParam(defaultValue="0")int curPage, Model model,Paging search) {
+		int total = companyService.getPlaceTotal(search);
 		System.out.println("place 갯수 = "+total);
 		
 		
 		Paging paging = new Paging(total,curPage);
+		
+		paging.setSearch(search.getSearch());
 		List placeList = companyService.getPlacePagingList(paging);
 		System.out.println(placeList);
+		model.addAttribute("search", search.getSearch());
 		model.addAttribute("paging", paging);
 		model.addAttribute("placeList", placeList);
 	}

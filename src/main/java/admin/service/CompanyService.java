@@ -40,10 +40,11 @@ public interface CompanyService {
 
 	/**
 	 * 
+	 * @param search 
 	 * @return
 	 * 제휴 업체 목록 가져오기
 	 */
-	public int getCompanyTotal();
+	public int getCompanyTotal(Paging search);
 	
 	/**
 	 * 
@@ -79,10 +80,11 @@ public interface CompanyService {
 
 	/**
 	 * 
+	 * @param search 
 	 * @return int
 	 * 해당 제휴 업체 장소 갯수 
 	 */
-	public int getPlaceTotal();
+	public int getPlaceTotal(Paging search);
 
 	/**
 	 * 

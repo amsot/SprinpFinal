@@ -60,8 +60,13 @@
 		</table>
 	</div>
 </div>
-<jsp:include page="/WEB-INF/views/admin/company/util/appPaging.jsp"/>	
-
+		<jsp:include page="/WEB-INF/views/admin/company/util/listPaging.jsp"/>	
+		<form action="/admin/company/companyList.do" method="get">
+		<div id="search"  style="margin-left: 430px;">
+		<input type="text" name="search"/>
+		<button class="btn btn-primary">검색</button>
+		</div>
+		</form>
 
 </body>
 </html>

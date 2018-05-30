@@ -13,7 +13,7 @@ public interface UserDao {
 	
 	public boolean deleteUser(User user);
 
-	public int getUserTotal();
+	public int getUserTotal(Paging search);
 
 	public List getUserPagingList(Paging paging);
 
@@ -23,6 +23,6 @@ public interface UserDao {
 
 	public List getBlackList(Paging paging);
 
-	public int getBlackTotal();
+	public int getBlackTotal(Paging search);
 
 }

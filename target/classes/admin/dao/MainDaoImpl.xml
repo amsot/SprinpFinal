@@ -10,12 +10,19 @@
 		VALUES (admin_boardseq.nextval,#{board_writer},#{board_title},#{board_content},#{board_type},#{board_file},sysdate)
 	</insert>
 	
-	<select id="getNoticeTotal" resultType="int">
+	<select id="getNoticeTotal" parameterType="admin.util.Paging" resultType="int">
 		SELECT COUNT(*) FROM admin_board 
+		<if test="search != null">
+		WHERE board_title Like '%' || #{search} || '%'
+		</if>
 	</select>
 	
 	<select id="getPagingNoticeList" parameterType="admin.util.Paging" resultType="admin.dto.Board">
-		SELECT * FROM (SELECT rownum board_list_no, b.* FROM (SELECT * FROM admin_board ORDER BY board_NO  ) b ORDER BY board_list_no DESC) WHERE board_list_no BETWEEN #{startNo} AND #{endNo}
+		SELECT * FROM (SELECT rownum board_list_no, b.* FROM (SELECT * FROM admin_board 
+		<if test="search != null">
+		WHERE board_title Like '%' || #{search} || '%'
+		</if>
+		ORDER BY board_NO  ) b ORDER BY board_list_no DESC) WHERE board_list_no BETWEEN #{startNo} AND #{endNo}
 	</select>
 	
 	<select id="getNoticeDetail" parameterType="admin.dto.Board" resultType="admin.dto.Board">

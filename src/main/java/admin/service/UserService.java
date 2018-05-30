@@ -33,10 +33,11 @@ public interface UserService {
 
 	/**
 	 * 
+	 * @param search 
 	 * @return int
 	 * USER의 총 갯수를 구함
 	 */
-	public int getUserTotal();
+	public int getUserTotal(Paging search);
 	
 	/**
 	 * 
@@ -62,8 +63,9 @@ public interface UserService {
 
 	/**
 	 * 
+	 * @param search 
 	 * @return int
 	 * 제재된 사용자의 수
 	 */
-	public int getBlackTotal();
+	public int getBlackTotal(Paging search);
 }

@@ -9,10 +9,11 @@ public interface GroupService {
 
 	/**
 	 * 
+	 * @param search 
 	 * @return int
 	 * ¸ðÀÓ ÃÑ °¹¼ö °¡Á®¿À±â
 	 */
-	public int getGroupTotal();
+	public int getGroupTotal(Paging search);
 	
 	/**
 	 * 

@@ -13,7 +13,7 @@ public interface MainDao {
 	
 	public void mainNoticeModify(Board board);
 
-	public int getNoticeTotal();
+	public int getNoticeTotal(Paging search);
 
 	public List getPagingNoticeList(Paging paging);
 

@@ -18,14 +18,14 @@
 		<%-- 첫 페이지면 금지 표시 --%>
 		<c:if test="${paging.curPage eq 1 }">
 		<li class="disabled">
-			<a href="/admin/user/userList.do?curPage=${paging.curPage }" aria-label="Previous">
+			<a href="/admin/user/userList.do?curPage=${paging.curPage }&search=${search}" aria-label="Previous">
 				<span aria-hidden="true">&laquo;</span>
 			</a>
 		</li>
 		</c:if>
 		<c:if test="${paging.curPage ne 1 }">
 		<li>
-			<a href="/admin/user/userList.do?curPage=${paging.curPage-1 }" aria-label="Previous">
+			<a href="/admin/user/userList.do?curPage=${paging.curPage-1 }&search=${search}" aria-label="Previous">
 				<span aria-hidden="true">&laquo;</span>
 			</a>
 		</li>
@@ -43,7 +43,7 @@
 			<c:if test="${paging.curPage ne page }">
 			<li>
 			</c:if>
-			<a href="/admin/user/userList.do?curPage=${page }">${page }</a>
+			<a href="/admin/user/userList.do?curPage=${page }&search=${search}">${page }</a>
 			</li>
 		</c:forEach>
 		
@@ -51,14 +51,14 @@
 		<%-- 마지막 페이지면 금지 표시 --%>
 		<c:if test="${paging.curPage eq paging.totalPage }">
 		<li class="disabled">
-			<a href="/admin/user/userList.do?curPage=${paging.curPage }" aria-label="Next">
+			<a href="/admin/user/userList.do?curPage=${paging.curPage }&search=${search}" aria-label="Next">
 				<span aria-hidden="true">&raquo;</span>
 			</a>
 		</li>
 		</c:if>
 		<c:if test="${paging.curPage ne paging.totalPage }">
 		<li>
-			<a href="/admin/user/userList.do?curPage=${paging.curPage+1 }" aria-label="Next">
+			<a href="/admin/user/userList.do?curPage=${paging.curPage+1 }&search=${search}" aria-label="Next">
 				<span aria-hidden="true">&raquo;</span>
 			</a>
 		</li>

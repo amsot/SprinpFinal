@@ -28,14 +28,22 @@ public class GroupController {
 	/**
 	 *  모임 목록 
 	 */
-	@RequestMapping(value="/admin/group/groupList.do")
-	public void groupList(@RequestParam(defaultValue="0") int curPage, Model model) {
-		int total = groupService.getGroupTotal();
-	
+	@RequestMapping(value="/admin/group/groupList.do",method=RequestMethod.GET)
+	public void groupList(@RequestParam(defaultValue="0") int curPage,Model model,Paging search) {
+		
+		//검색할 수 도 있으니 검색한 갯수 가져오도록 검색 paging도 보내줌 (daoImpl에서 어차피 if문으로 구분)
+		int total = groupService.getGroupTotal(search);
+		
+		//페이징 객체 생성자 생성
 		Paging paging = new Paging(total,curPage);
+		
+		//기본 페이징 객체에다가 검색한 값을 입력해줌
+		paging.setSearch(search.getSearch());
 		model.addAttribute("paging", paging);
+		//위에서 search 설정했기 때문에 가져감 -> daoImpl에서 구분함.
 		List groupList = groupService.getGroupPagingList(paging);
-		System.out.println(groupList);
+		//paging.jsp에서 계속 그 값을 가지고 있어야 해서 search 따로 보내줌.
+		model.addAttribute("search", search.getSearch());
 		model.addAttribute("groupList", groupList);
 
 	}

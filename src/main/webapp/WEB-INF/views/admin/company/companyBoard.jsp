@@ -52,6 +52,12 @@
 	</div>
 </div>
 
-<jsp:include page="/WEB-INF/views/admin/company/util/boardPaging.jsp"/>	
+		<jsp:include page="/WEB-INF/views/admin/company/util/boardPaging.jsp"/>	
+		<form action="/admin/company/companyBoard.do" method="get">
+		<div id="search"  style="margin-left: 430px;">
+		<input type="text" name="search"/>
+		<button class="btn btn-primary">검색</button>
+		</div>
+		</form>
 </body>
 </html>

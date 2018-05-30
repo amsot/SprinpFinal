@@ -15,8 +15,8 @@ public class GroupServiceImpl implements GroupService {
 	@Autowired GroupDao groupDao;
 	
 	@Override
-	public int getGroupTotal() {
-		return groupDao.getGroupTotal();
+	public int getGroupTotal(Paging search) {
+		return groupDao.getGroupTotal(search);
 	}
 
 	@Override

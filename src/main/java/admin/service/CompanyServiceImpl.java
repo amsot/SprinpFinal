@@ -36,8 +36,8 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public int getCompanyTotal() {
-		return companyDao.getCompanyTotal();
+	public int getCompanyTotal(Paging search) {
+		return companyDao.getCompanyTotal(search);
 	}
 
 	@Override
@@ -68,8 +68,8 @@ public class CompanyServiceImpl implements CompanyService {
 		
 	}
 	@Override
-	public int getPlaceTotal() {
-		return companyDao.getPlaceTotal();
+	public int getPlaceTotal(Paging search) {
+		return companyDao.getPlaceTotal(search);
 	}
 
 	@Override

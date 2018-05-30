@@ -62,11 +62,17 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	
-	</div>
+		</div>
 
-<jsp:include page="/WEB-INF/views/admin/user/paging.jsp"/>
+	<jsp:include page="/WEB-INF/views/admin/user/paging.jsp"/>
+	<form action="/admin/user/userList.do" method="get">
+	<div id="search"  style="margin-left: 600px;">
+			<input type="text" name="search"/>
+			<button class="btn btn-primary">검색</button>
+			</div>
+		</form>
 </div>
+
 
 </body>
 </html>

@@ -16,7 +16,7 @@ public interface CompanyDao {
 
 	public boolean companyApply(Company company);
 
-	public int getCompanyTotal();
+	public int getCompanyTotal(Paging search);
 
 	public List getCompanyPagingList(Paging paging);
 
@@ -28,7 +28,7 @@ public interface CompanyDao {
 	
 	public void companyNoBlack(Company company);
 
-	public int getPlaceTotal();
+	public int getPlaceTotal(Paging search);
 
 	public List getPlacePagingList(Paging paging);
 

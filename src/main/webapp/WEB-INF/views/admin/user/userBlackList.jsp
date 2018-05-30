@@ -34,11 +34,17 @@
 						<td>${c.u_no }</td>
 						<td>${c.u_name }</td>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
-</div>	
-<jsp:include page="/WEB-INF/views/admin/user/util/blackPaging.jsp"/>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>	
+	<jsp:include page="/WEB-INF/views/admin/user/util/blackPaging.jsp"/>
+		<form action="/admin/user/userBlackList.do" method="get">
+		<div id="search"  style="margin-left: 600px;">
+			<input type="text" name="search"/>
+			<button class="btn btn-primary">검색</button>
+		</div>
+		</form>
 </body>
 </html>

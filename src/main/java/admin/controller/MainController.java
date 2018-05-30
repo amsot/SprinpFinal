@@ -37,13 +37,17 @@ public class MainController {
 	/**
 	 *  공지사항 관리
 	 */
-	@RequestMapping(value="/admin/main/mainNotice.do")
-	public void mainNotice(@RequestParam(defaultValue="0")int curPage, Model model) {
-		int total = mainService.getNoticeTotal();
+	@RequestMapping(value="/admin/main/mainNotice.do",method=RequestMethod.GET)
+	public void mainNotice(@RequestParam(defaultValue="0")int curPage, Model model,Paging search) {
+		int total = mainService.getNoticeTotal(search);
 		
 		Paging paging = new Paging(total,curPage);
-		model.addAttribute("paging", paging);
+		
+		paging.setSearch(search.getSearch());
 		List mainNoticeList = mainService.getPagingNoticeList(paging);
+		
+		model.addAttribute("search", search.getSearch());
+		model.addAttribute("paging", paging);
 		model.addAttribute("mainNoticeList",mainNoticeList);
 	}
 	
@@ -61,6 +65,7 @@ public class MainController {
 	 */
 	@RequestMapping(value="/admin/main/mainNoticeWrite.do",method=RequestMethod.POST)
 	public String mainNoticeWriteDo(Board board,Model model) {
+		System.out.println(board);
 		boolean result = mainService.mainNoticeInsert(board);
 		if(result) {
 			model.addAttribute("msg", "공지사항 글이 작성되었습니다.");

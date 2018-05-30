@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.SystemPropertyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import admin.dto.User;
@@ -29,14 +30,18 @@ public class UserController {
 	 *  userList
 	 *  회원 정보 관리
 	 */
-	@RequestMapping(value="/admin/user/userList.do")
-	public void userList(@RequestParam(defaultValue="0")int curPage,Model model) {
-		int total = userService.getUserTotal();
+	@RequestMapping(value="/admin/user/userList.do",method=RequestMethod.GET)
+	public void userList(@RequestParam(defaultValue="0")int curPage,Model model,Paging search) {
+		int total = userService.getUserTotal(search);
+		System.out.println("해당 갯수 : " + total);
 		
 		Paging paging = new Paging(total,curPage);
-		model.addAttribute("paging", paging);
 		
+		paging.setSearch(search.getSearch());
 		List userList = userService.getUserPagingList(paging);
+		
+		model.addAttribute("search", search.getSearch());
+		model.addAttribute("paging", paging);
 		model.addAttribute("userList", userList);
 	}
 	
@@ -111,13 +116,16 @@ public class UserController {
 	 *  회원 제재 리스트
 	 */
 	@RequestMapping(value="/admin/user/userBlackList.do")
-	public void userBlackList(@RequestParam(defaultValue="0") int curPage,Model model) {
-		int total = userService.getBlackTotal();
+	public void userBlackList(@RequestParam(defaultValue="0") int curPage,Model model,Paging search) {
+		int total = userService.getBlackTotal(search);
 		System.out.println("제재된 사용자의 수 : "+total);
 		
 		Paging paging = new Paging(total,curPage);
 		
+		paging.setSearch(search.getSearch());
 		List userBlackList = userService.getBlackList(paging);
+		
+		model.addAttribute("search", search.getSearch());
 		model.addAttribute("paging", paging);
 		model.addAttribute("userBlackList", userBlackList);
 	}

@@ -31,8 +31,8 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
-	public int getNoticeTotal() {
-		return mainDao.getNoticeTotal();
+	public int getNoticeTotal(Paging search) {
+		return mainDao.getNoticeTotal(search);
 	}
 
 	@Override

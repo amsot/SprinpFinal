@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int getUserTotal() {
-		return userDao.getUserTotal();
+	public int getUserTotal(Paging search) {
+		return userDao.getUserTotal(search);
 	}
 
 	@Override
@@ -57,8 +57,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int getBlackTotal() {
-		return userDao.getBlackTotal();
+	public int getBlackTotal(Paging search) {
+		return userDao.getBlackTotal(search);
 	}
 
 }
