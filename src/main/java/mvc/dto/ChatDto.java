@@ -7,9 +7,15 @@ public class ChatDto {
 	private String chat_no;
 	private String  chat_content;
 	private Date chat_sendTime;
-	private String  chatroom_id;
+	private String  chatroom_no;
 	private String UESR_ID;
 	
+	public String getChatroom_no() {
+		return chatroom_no;
+	}
+	public void setChatroom_no(String chatroom_no) {
+		this.chatroom_no = chatroom_no;
+	}
 	public String getUESR_ID() {
 		return UESR_ID;
 	}
@@ -34,18 +40,6 @@ public class ChatDto {
 	public void setChat_sendTime(Date chat_sendTime) {
 		this.chat_sendTime = chat_sendTime;
 	}
-	public String getChatroom_id() {
-		return chatroom_id;
-	}
-	public void setChatroom_id(String chatroom_id) {
-		this.chatroom_id = chatroom_id;
-	}
-	public int getUesr_no() {
-		return uesr_no;
-	}
-	public void setUesr_no(int uesr_no) {
-		this.uesr_no = uesr_no;
-	}
-	int uesr_no;
+
 
 }

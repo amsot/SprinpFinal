@@ -93,7 +93,7 @@ public class Socket {
 		System.out.println((String)session.getAttribute("chatRoom"));
 		System.out.println((String)session.getAttribute("id"));
 		dto.setChat_content(message);
-		dto.setChatroom_id((String)session.getAttribute("chatRoom"));
+		dto.setChatroom_no((String)session.getAttribute("chatRoom"));
 		dto.setUESR_ID((String)session.getAttribute("id"));
 		
 		s.insertChat(dto);
