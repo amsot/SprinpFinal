@@ -44,13 +44,25 @@ public class Socket {
 	}
 	@RequestMapping("/chatTap")
 	public String chatTap() {
-		return "chatting/chatTap";
+		return "chatting/tap";
 	}
-	@RequestMapping("/chat")
-	public ModelAndView viewChattingPage(String id,String chatRoom, HttpSession session) {
+	
+	
 
-		session.setAttribute("id", id);
+	
+	@ResponseBody
+	@RequestMapping(value="/chatSession",method = RequestMethod.POST)
+	public String chatSession(@RequestBody String chatRoom,HttpSession session) {
 		session.setAttribute("chatRoom", chatRoom);
+		System.out.println(session.getAttribute("chatRoom"));
+		return "hihi";
+	}
+	
+	
+	@RequestMapping(value="/chatting/chat.do",method = RequestMethod.GET)
+	public ModelAndView chatSession(String chatRoom,String id ,HttpSession session) {
+		id = (String)session.getAttribute("id");
+		chatRoom = (String)session.getAttribute("chatRoom");
 
 		if(!chatRoomList.contains(chatRoom)) {
 			chatRoomList.add(chatRoom);
@@ -66,7 +78,7 @@ public class Socket {
 
 		for(String chat_id : chatRoomList) {
 			if(chat_id.equals(chatRoom)) {
-				session.setAttribute("userLiest", chatRoomUser.get(chat_id));
+				session.setAttribute("userList", chatRoomUser.get(chat_id));
 			}
 		}
 		
@@ -78,6 +90,48 @@ public class Socket {
 		
 		
 		view.setViewName("chatting/chat");
+//		view.setViewName("chatting/tap");
+		
+		view.addObject("chatlist", list);
+		
+		return view;
+	
+		
+	}
+	@RequestMapping("/chat")
+	public ModelAndView viewChattingPage(String id,String chatRoom, HttpSession session) {
+
+		session.setAttribute("id", id);
+		session.setAttribute("chatRoom", chatRoom);
+		
+
+		if(!chatRoomList.contains(chatRoom)) {
+			chatRoomList.add(chatRoom);
+		}
+		if(chatRoomList.size() != chatRoomUser.size()) {
+			chatRoomUser.put(chatRoom, new ArrayList<String>());
+			chatRoomUser.get(chatRoom).add(id);
+		}else if(chatRoomList.size() == chatRoomUser.size() && !chatRoomUser.get(chatRoom).contains(id)) {
+			chatRoomUser.get(chatRoom).add(id);
+		}
+
+		System.out.println(chatRoomUser);
+
+		for(String chat_id : chatRoomList) {
+			if(chat_id.equals(chatRoom)) {
+				session.setAttribute("userList", chatRoomUser.get(chat_id));
+			}
+		}
+		
+		
+		ModelAndView view = new ModelAndView();
+		List<ChatDto> list = new ArrayList<ChatDto>();
+		
+		list = s.selectChat((String)session.getAttribute("chatRoom"));
+		
+		
+//		view.setViewName("chatting/chat");
+		view.setViewName("chatting/tap");
 		
 		view.addObject("chatlist", list);
 		
