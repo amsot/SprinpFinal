@@ -20,10 +20,13 @@
 	</definition>
 	
 	
+	<definition name="chatting/chat" template="/WEB-INF/views/chatting/chat.jsp">
+	</definition>
 	
 	<definition name="*" extends="tilesbase">
 		<put-attribute name="body" value="/WEB-INF/views/{1}.jsp"/>
 	</definition>
+
 
 	<definition name="*/*" extends="tilesbase">
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>

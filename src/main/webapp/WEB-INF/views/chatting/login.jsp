@@ -9,7 +9,13 @@
 <body>
 
 <form action="chat">
-	<input type="text" name="chatRoom">
+	
+	<select name="chatRoom">
+		 <option value="1">1</option>
+    	<option value="2">2</option>
+    	<option value="3">3</option>
+    	<option value="4">4</option>
+	</select>
 	<input type="text" name="id">
 	<button>로그인</button>
 </form>

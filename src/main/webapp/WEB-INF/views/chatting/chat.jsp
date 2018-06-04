@@ -1,16 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
-<script
-	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>chat</title>
+<head>       
 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
+
+<!-- <script type="text/javascript"src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
+</head>
 <script type="text/javascript">
  
     var chatSock = null;
@@ -21,7 +26,7 @@
          
         chatSock.onopen = function() {
         	var str = "";
-        	<c:forEach items="${sessionScope.userLiest}" var="list">
+        	<c:forEach items="${sessionScope.userList}" var="list">
 				str +="${list} </br>"
         	</c:forEach>
 				 $("#userList").html(str);
@@ -30,8 +35,9 @@
         };
          
         chatSock.onmessage = function(evt) {
+    	  
         	var str = "";
-        	<c:forEach items="${sessionScope.userLiest}" var="list">
+        	<c:forEach items="${sessionScope.userList}" var="list">
 				str +="${list}</br>"
         	</c:forEach>
 				 $("#userList").html(str);
@@ -40,9 +46,9 @@
         };
          
         chatSock.onclose = function() {
-        
+   
            	var str = "";
-        	<c:forEach items="${sessionScope.userLiest}" var="list">
+        	<c:forEach items="${sessionScope.userList}" var="list">
 				str +="${list}</br>"
         	</c:forEach>
 				 $("#userList").html(str);
@@ -55,7 +61,7 @@
             	 if( $("#message").val() != "") {
                  	var str = "";
                  	
-                	<c:forEach items="${sessionScope.userLiest}" var="list">
+                	<c:forEach items="${sessionScope.userList}" var="list">
         				str +="${list}</br>"
                 	</c:forEach>
         			$("#userList").html(str);
@@ -77,7 +83,7 @@
         	console.log('1111');
             if( $("#message").val() != "") {
             	var str = "";
-            	<c:forEach items="${sessionScope.userLiest}" var="list">
+            	<c:forEach items="${sessionScope.userList}" var="list">
     				str +="${list}</br>"
             	</c:forEach>
     				 $("#userList").html(str);
@@ -92,6 +98,19 @@
                 $("#message").val("");
             }
         });
+        $("#reload").click(function(){
+
+         	var str = "";
+        	<c:forEach items="${sessionScope.userList}" var="list">
+				str +="${list}</br>"
+        	</c:forEach>
+				 $("#userList").html(str);
+        });
+  
+        
+        
+        
+        
     });
         $(function () {
             var obj = $("#chatMessage");
@@ -143,14 +162,14 @@
                     contentType: false,
                     success: function(res) {
                     	var str = "";
-                    	<c:forEach items="${sessionScope.userLiest}" var="list">
+                    	<c:forEach items="${sessionScope.userList}" var="list">
             				str +="${list} </br>"
                     	</c:forEach>
             				 $("#userList").html(str);;
 						console.log(res.stored);
-						chatSock.send("<img style=\"width: 200px;height: 200px\" src=\"/resources/img/"+res.stored+"\"><br/>");
-                    	 $("#chatMessage").append("나 ->  <img style=\"width: 200px;height: 200px\" src=\"/resources/img/"+res.stored+"\"><br/>");
-                    	 var message = "<img style=\"width: 200px;height: 200px\" src=\"/resources/img/"+res.stored+"\"><br/>";
+						chatSock.send("<img style=\"width: 100px;height: 100px\" src=\"/resources/img/"+res.stored+"\"><br/>");
+                    	 $("#chatMessage").append("나 ->  <img style=\"width: 100px;height: 100px\" src=\"/resources/img/"+res.stored+"\"><br/>");
+                    	 var message = "<img style=\"width: 100px;height: 100px\" src=\"/resources/img/"+res.stored+"\"><br/>";
                     	 sendAjax(message);
                     	 $("#chatMessage").scrollTop(99999999);
                     }
@@ -177,19 +196,23 @@
             });
        }
 
+
+
 </script>
 
 
-</head>
+
 <body>
-<div role="tabpanel">
-
-
+<div role="tabpanel"  style="     height: 40px; width: 300px">
+			<div>
+				<h3 style=" width: 280px;padding: 0; margin: 0; position: absolute; left: 113px;" >채팅방 : <%=session.getAttribute("chatRoom") %></h3>
+				<span class="glyphicon glyphicon-remove" style="left: 380px;"></span>
+			</div>
 	</div>
-	<input type="button" id="sendMessage" value="엔터" />
-	<input type="text" id="message" placeholder="메시지 내용" />
+	<div style="float:left;">
+	
 	<div id="chatMessage"
-		style="overFlow: auto; width: 700px; height: 500px; border: 1px solid black;">
+		style="overFlow: auto; width: 300px; height: 200px; border: 1px solid black;">
 	   			<c:forEach items="${chatlist}" var="list">
 	   				<c:if test="${list.getUESR_ID() ne sessionScope.id}">
     					${list.getUESR_ID()} ▶  ${list.getChat_content()}<br>
@@ -199,11 +222,15 @@
     				</c:if>
             	</c:forEach>
 		</div>
-	<div>
+            	<input type="button" id="sendMessage" value="엔터" />
+				<input type="text" id="message" placeholder="메시지 내용" />
+	</div>
+	<div style="float:left;">
 		<span>유저 목록</span>
 		<div id="userList"
-			style="overFlow: auto; width: 200px; height: 500px; border: 1px solid black;"></div>
+			style="overFlow: auto; width: 100px; height: 180px; border: 1px solid black;  "></div>
 	</div>
 </body>
 </html>
+
 
