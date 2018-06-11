@@ -16,13 +16,13 @@
     var chatSock = null;
  
     $(document).ready(function(){
-    	$("#chatMessage").scrollTop(99999999);
+         
         chatSock = new SockJS("/echo-ws");
          
         chatSock.onopen = function() {
         	var str = "";
         	<c:forEach items="${sessionScope.userLiest}" var="list">
-				str +="${list} </br>"
+				str +=${list} +"</br>"
         	</c:forEach>
 				 $("#userList").html(str);
         
@@ -32,7 +32,7 @@
         chatSock.onmessage = function(evt) {
         	var str = "";
         	<c:forEach items="${sessionScope.userLiest}" var="list">
-				str +="${list}</br>"
+				str +=${list} +"</br>"
         	</c:forEach>
 				 $("#userList").html(str);
             $("#chatMessage").append(evt.data+"<br />");
@@ -43,7 +43,7 @@
         
            	var str = "";
         	<c:forEach items="${sessionScope.userLiest}" var="list">
-				str +="${list}</br>"
+				str +=${list} +"</br>"
         	</c:forEach>
 				 $("#userList").html(str);
             sock.send("채팅을 종료합니다.");
@@ -56,15 +56,11 @@
                  	var str = "";
                  	
                 	<c:forEach items="${sessionScope.userLiest}" var="list">
-        				str +="${list}</br>"
+        				str +=${list} +"</br>"
                 	</c:forEach>
         			$("#userList").html(str);
         				 
                  chatSock.send($("#message").val());
-  
-                 var message = $("#message").val();
-                 sendAjax(message);
-                 
                  $("#chatMessage").append("나 ->  " + $("#message").val() + "<br/>");
                  $("#chatMessage").scrollTop(99999999);
 
@@ -78,14 +74,10 @@
             if( $("#message").val() != "") {
             	var str = "";
             	<c:forEach items="${sessionScope.userLiest}" var="list">
-    				str +="${list}</br>"
+    				str +=${list} +"</br>"
             	</c:forEach>
     				 $("#userList").html(str);
                 chatSock.send($("#message").val());
-                
-                var message = $("#message").val();
-          		sendAjax(message);
-                
                 $("#chatMessage").append("나 ->  " + $("#message").val() + "<br/>");
                 $("#chatMessage").scrollTop(99999999);
 
@@ -144,15 +136,12 @@
                     success: function(res) {
                     	var str = "";
                     	<c:forEach items="${sessionScope.userLiest}" var="list">
-            				str +="${list} </br>"
+            				str +=${list} +"</br>"
                     	</c:forEach>
             				 $("#userList").html(str);;
 						console.log(res.stored);
 						chatSock.send("<img style=\"width: 200px;height: 200px\" src=\"/resources/img/"+res.stored+"\"><br/>");
                     	 $("#chatMessage").append("나 ->  <img style=\"width: 200px;height: 200px\" src=\"/resources/img/"+res.stored+"\"><br/>");
-                    	 var message = "<img style=\"width: 200px;height: 200px\" src=\"/resources/img/"+res.stored+"\"><br/>";
-                    	 sendAjax(message);
-                    	 $("#chatMessage").scrollTop(99999999);
                     }
                  });
              }
@@ -163,42 +152,16 @@
              for(var i=0; i < files.length; i++)
                  console.log(files[i].file_nm + " - " + files[i].file_size);
         }
-        
-       function sendAjax(message){
-           $.ajax({
-               url: "/chat/db",
-               method: 'POST',
-               data: message,
-               dataType: 'json',
-               contentType: "application/json; charset=UTF-8",
-               success: function(res) {
-					console.log("성공");
-               }
-            });
-       }
-
+    
 </script>
 
 
 </head>
 <body>
-<div role="tabpanel">
-
-
-	</div>
 	<input type="button" id="sendMessage" value="엔터" />
 	<input type="text" id="message" placeholder="메시지 내용" />
 	<div id="chatMessage"
-		style="overFlow: auto; width: 700px; height: 500px; border: 1px solid black;">
-	   			<c:forEach items="${chatlist}" var="list">
-	   				<c:if test="${list.getUESR_ID() ne sessionScope.id}">
-    					${list.getUESR_ID()} ▶  ${list.getChat_content()}<br>
-    				</c:if>
-    				<c:if test="${list.getUESR_ID() eq sessionScope.id}">
-    					나  ->  ${list.getChat_content()}<br>
-    				</c:if>
-            	</c:forEach>
-		</div>
+		style="overFlow: auto; width: 700px; height: 500px; border: 1px solid black;"></div>
 	<div>
 		<span>유저 목록</span>
 		<div id="userList"

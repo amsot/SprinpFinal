@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mvc.dao.MemberDao">
+
+<insert id="join" parameterType="mvc.dto.Writer">
+	INSERT INTO Writer (userid, userpw, usernick) values(#{userid}, #{userpw}, #{usernick})
+</insert>
+
+<select id="getOneUser" parameterType="mvc.dto.Writer" resultType="int">
+	SELECT COUNT(*) FROM WRITER WHERE userid = #{userid}
+</select>
+
+</mapper>

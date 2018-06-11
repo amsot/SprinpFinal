@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mvc.dao.GroupSearchDao">
+	<!-- 카테고리 검색 -->
+	<select id="searchList" parameterType="mvc.dto.Mygroup" resultType="mvc.dto.Mygroup">
+		SELECT * FROM groups
+		WHERE main_cat =#{main_cat} AND small_cat =#{small_cat} AND location =#{location} AND location_cat =#{location_cat}
+	</select>
+	
+	<!-- main 카테고리 클릭 시 list 보이기 -->
+	<select id="selectAll" parameterType="mvc.dto.Mygroup" resultType="mvc.dto.Mygroup">
+		SELECT * FROM groups WHERE main_cat =#{main_cat}
+	</select>
+	
+	<select id="keyword"  parameterType="mvc.dto.Mygroup" resultType="mvc.dto.Mygroup">
+		SELECT * FROM groups
+		WHERE (main_cat LIKE '%'||#{keyword}||'%' OR small_cat LIKE '%'||#{keyword}||'%' OR location LIKE '%'||#{keyword}||'%' OR location_cat LIKE '%'||#{keyword}||'%')
+	</select>
+</mapper>

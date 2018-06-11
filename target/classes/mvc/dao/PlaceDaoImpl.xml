@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mvc.dao.PlaceDao">
+	
+	<resultMap type="mvc.dto.Place" id="Place">
+		<result property="pla_no" column="pla_no"/>
+		<result property="pla_name" column="pla_name"/>
+		<result property="pla_address" column="pla_address"/>
+		<result property="pla_phone" column="pla_phone"/>
+		<result property="pla_money" column="pla_money"/>
+		<result property="pla_time" column="pla_time"/>
+		<result property="pla_statue" column="pla_statue"/>
+		<result property="pla_start" column="pla_start"/>
+		<result property="pla_end" column="pla_end"/>
+		<result property="pla_people" column="pla_people"/>
+	
+	</resultMap>
+
+<insert id="placeInsert" parameterType="mvc.dto.Place">
+ INSERT INTO PLACE (com_id,pla_no, pla_name, pla_address, pla_phone, pla_money, pla_time, pla_statue,pla_start, pla_end, pla_people )
+ VALUES(#{com_id},seq_pla_no.nextval, #{pla_name},#{pla_address},#{pla_phone},#{pla_money},#{pla_time},#{pla_statue},#{pla_start},#{pla_end},#{pla_people})
+</insert>
+
+<select id="getPlaceList" resultMap="Place">
+	SELECT * FROM PLACE order by pla_no
+</select>
+
+<select id="selectPlaceByPlaceNo" resultMap="Place" parameterType="mvc.dto.Place">
+	SELECT pla_no,pla_name,pla_address,pla_phone,pla_money,pla_time, pla_statue,pla_start, pla_end, pla_people FROM PLACE WHERE PLA_NO = #{pla_no} 
+</select>
+</mapper>

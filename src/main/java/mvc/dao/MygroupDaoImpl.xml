@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mvc.dao.MygroupDao">
+
+	<insert id="groupRegistration" parameterType="mvc.dto.Mygroup">
+		INSERT INTO mygroup VALUE`S(seq_mygroup_no.nextval, #{group_id}, #{location}, 0, #{main_cat}, #{small_cat}, #{personnel}, '채팅', #{intro}, #{u_id})
+	</insert>
+
+	<select id="getList" parameterType="String" resultType="mvc.dto.Mygroup">
+		SELECT group_no, group_id, location, manager_id, main_cat, small_cat, personnel, chat_id, intro, u_id FROM mygroup ORDER BY group_no DESC
+	</select>
+
+	
+	<select id="getViewMygroup" parameterType="mvc.dto.Mygroup" resultType="mvc.dto.Mygroup">
+		SELECT group_no, group_id, location, manager_id, main_cat, small_cat, personnel, chat_id, intro, u_id FROM mygroup WHERE group_no=#{group_no} ORDER BY group_no DESC
+	</select>
+	
+	<delete id="mygroupDelete" parameterType="mvc.dto.Mygroup">
+		DELETE FROM mygroup WHERE group_no = #{group_no}
+	</delete>
+	
+</mapper>

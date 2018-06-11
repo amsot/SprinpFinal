@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mvc.dao.UserDao">
+	<select id="login" parameterType="mvc.dto.User" resultType="int">
+		SELECT COUNT(*) FROM users WHERE u_id = #{u_id } AND u_pw = #{u_pw }
+	</select>
+	
+	<insert id="insertUser" parameterType="mvc.dto.User">
+		INSERT INTO users(u_no, u_id, u_pw, u_name, u_nick, u_birthdate, u_phone, u_address, u_email, u_sex, u_grade, u_interests, group_no, u_black) VALUES(SEQ_U_NO.nextval, #{u_id }, #{u_pw }, #{u_name}, #{u_nick}, #{u_birthdate}, #{u_phone}, #{u_address}, #{u_email}, #{u_sex}, 0, #{u_interests}, 0, 1)
+	</insert>
+	
+	<select id="selectCntById" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM users WHERE u_id = #{value }
+	</select>
+	
+	<select id="selectUserById" parameterType="String" resultType="mvc.dto.User"> 
+ 		SELECT u_no, u_id, u_pw, u_name, u_nick, u_birthdate, u_phone, u_address, u_email, u_sex, u_interests FROM users WHERE u_id = #{u_id } 
+ 	</select> 
+	
+ 	<select id="selectUserByNick" parameterType="mvc.dto.User" resultType="mvc.dto.User">
+ 		SELECT u_nick FROM users WHERE u_id = #{u_id }
+ 	</select> 
+ 	
+ 	<update id="editUser" parameterType="mvc.dto.User" >
+		UPDATE users SET u_pw = #{u_pw }, u_nick = #{u_nick }, u_phone = #{u_phone }, u_address = #{u_address }, u_email = #{u_email }, u_interests = #{u_interests} WHERE u_id = #{u_id}
+	</update>
+	
+	<delete id="deleteUser" parameterType="mvc.dto.User">
+		DELETE FROM USERS WHERE u_no = #{u_no }
+	</delete>
+
+	<select id="idCheck" parameterType="mvc.dto.User" resultType="int">
+		SELECT COUNT(*) FROM users WHERE u_id = #{u_id}
+	</select>
+
+</mapper>
