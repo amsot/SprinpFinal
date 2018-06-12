@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mvc.dao.GroupDAO">
+	<select id="getGroupList"
+			resultType="mvc.dto.Groups">
+			SELECT * FROM groups ORDER BY group_no
+	</select>
+	<select id="getGroupInfo"
+			parameterType="mvc.dto.Groups"
+			resultType="mvc.dto.Groups">
+			SELECT * FROM groups WHERE group_no=#{group_no}
+	</select>
+</mapper>

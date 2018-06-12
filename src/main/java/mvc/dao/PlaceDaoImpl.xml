@@ -15,17 +15,47 @@
 		<result property="pla_people" column="pla_people"/>
 	
 	</resultMap>
+	<resultMap type="mvc.dto.Reser" id="Reser">
+		<result property="pla_no" column="pla_no"/>
+		<result property="u_id" column="u_id"/>
+		<result property="personnel" column="personnel"/>
+		<result property="rstart" column="rstart"/>
+		<result property="rend" column="rend"/>
+			
+	</resultMap>
 
 <insert id="placeInsert" parameterType="mvc.dto.Place">
- INSERT INTO PLACE (com_id,pla_no, pla_name, pla_address, pla_phone, pla_money, pla_time, pla_statue,pla_start, pla_end, pla_people )
- VALUES(#{com_id},seq_pla_no.nextval, #{pla_name},#{pla_address},#{pla_phone},#{pla_money},#{pla_time},#{pla_statue},#{pla_start},#{pla_end},#{pla_people})
+ INSERT INTO PLACE (com_id,pla_no, pla_name, pla_address, pla_phone, pla_money, pla_time, pla_statue,pla_start, pla_end, pla_people,img )
+ VALUES(#{com_id},seq_pla_no.nextval, #{pla_name},#{pla_address},#{pla_phone},#{pla_money},#{pla_time},#{pla_statue},#{pla_start},#{pla_end},#{pla_people},#{img})
 </insert>
 
 <select id="getPlaceList" resultMap="Place">
-	SELECT * FROM PLACE order by pla_no
+	SELECT * FROM PLACE order by pla_no desc
 </select>
 
 <select id="selectPlaceByPlaceNo" resultMap="Place" parameterType="mvc.dto.Place">
-	SELECT pla_no,pla_name,pla_address,pla_phone,pla_money,pla_time, pla_statue,pla_start, pla_end, pla_people FROM PLACE WHERE PLA_NO = #{pla_no} 
+	SELECT com_id,pla_no,pla_name,pla_address,pla_phone,pla_money,pla_time, pla_statue,pla_start, pla_end, pla_people , img FROM PLACE WHERE PLA_NO = #{pla_no} 
 </select>
+
+<delete id="placedelete" parameterType="mvc.dto.Place">
+	DELETE FROM PLACE where pla_no=#{pla_no}
+</delete>
+
+<update id="placeupdate" parameterType="mvc.dto.Place" >
+	UPDATE PLACE SET pla_name=#{pla_name},pla_address=#{pla_address},pla_phone=#{pla_phone},pla_money=#{pla_money},pla_time=#{pla_time}, pla_statue=#{pla_statue},pla_start=#{pla_start}, pla_end=#{pla_end}, pla_people=#{pla_people} WHERE pla_no =#{pla_no}
+</update>
+
+<select id="getTotal" resultType="int">
+	SELECT COUNT(*) FROM PLACE
+</select>
+
+<select id="paginglistSelect" resultMap="Place"  parameterType="mvc.util.Paging">
+	SELECT * FROM (select rownum rnum, b.* from ( select * from place order by pla_no desc)b order by rnum)
+	where rnum between #{startNo} and #{endNo}
+</select>
+
+<select id="getReserList" resultMap="Reser" parameterType="mvc.dto.Reser">
+	select u_id,personnel, rstart, rend, reserDate from com_userble where pla_no =#{pla_no}
+	</select>
+
 </mapper>

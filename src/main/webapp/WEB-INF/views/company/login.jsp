@@ -48,8 +48,6 @@ $(document).ready( function() {
 		<label>아이디 : <input type="text"	name="com_id" id="com_id"></label><br>
 		<label>비밀번호: <input type="text" name="com_pw" id="com_pw"></label><br>
 		<button class="btn btn-primary" id="login">로그인</button>
-	
-	
 	</form>
 </div>
 </body>

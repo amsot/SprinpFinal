@@ -7,12 +7,21 @@ private int pla_no;
 private String pla_name;
 private String pla_address;
 private String pla_phone;
-private String pla_money;
+private int pla_money;
 private String pla_time;
 private String pla_statue;
 private int pla_start;
 private int pla_end;
 private int pla_people;
+private String img;
+
+
+public String getImg() {
+	return img;
+}
+public void setImg(String img) {
+	this.img = img;
+}
 public String getCom_id() {
 	return com_id;
 }
@@ -43,10 +52,10 @@ public String getPla_phone() {
 public void setPla_phone(String pla_phone) {
 	this.pla_phone = pla_phone;
 }
-public String getPla_money() {
+public int getPla_money() {
 	return pla_money;
 }
-public void setPla_money(String pla_money) {
+public void setPla_money(int pla_money) {
 	this.pla_money = pla_money;
 }
 public String getPla_time() {
@@ -79,7 +88,7 @@ public int getPla_people() {
 public void setPla_people(int pla_people) {
 	this.pla_people = pla_people;
 }
-
+ 
 @Override
 public String toString() {
 	return "PLACE=[com_id="+com_id+",pla_name="+pla_name+",pla_address="+pla_address+",pla_phone="+pla_phone+","

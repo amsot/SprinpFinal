@@ -22,7 +22,7 @@
 	</repositories>
 	<dependencies>
 
-
+ 
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -189,7 +189,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.20</version>
+			<version>1.18.0</version>
 			<scope>provided</scope>
 		</dependency>
 		 <!--  웹소켓 --> 
@@ -219,12 +219,22 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.9.5</version>
 		</dependency>
-
-
-
-
-
-
+		
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+      <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.16.20</version>
+          <scope>provided</scope>
+      </dependency>
+      
+      <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+		 <groupId>org.apache.httpcomponents</groupId>
+		 <artifactId>httpclient</artifactId>
+		 <version>4.5.5</version>
+		</dependency>
+    
 	</dependencies>
 	<build>
 		<plugins>

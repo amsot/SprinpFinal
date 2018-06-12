@@ -51,7 +51,9 @@ public class mainController {
 		model.addAttribute("list", list);
 	}
 	
-	//정모
-	@RequestMapping(value="/tiles/meeting.do")
-	public void Meeting() { }
+	//모임 보이기
+		@RequestMapping(value = "/test/list.do", method=RequestMethod.GET)
+		public void test() { }
+		
+	
 }

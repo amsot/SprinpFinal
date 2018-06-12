@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mvc.dao.MeetingDAO">
+	<select id="getMeetingList"
+			parameterType="mvc.dto.Groups"
+			resultType="mvc.dto.Meeting_reservation">
+			SELECT * FROM meeting_reservation WHERE group_no = #{group_no} ORDER BY meeting_no DESC
+	</select>
+	<select id="getMeetingGuest"
+			parameterType="mvc.dto.Meeting_reservation"
+			resultType="mvc.dto.Meeting_guest">
+			SELECT * FROM meeting_guest WHERE meeting_no=#{meeting_no} ORDER BY user_id
+	</select>
+	<select id="isGuest"
+			parameterType="mvc.dto.Meeting_guest"
+			resultType="int">
+			SELECT COUNT(*) FROM meeting_guest WHERE meeting_no=#{meeting_no} AND user_id=#{u_id}
+	</select>
+	<insert id="insertMeetingGuest"
+			parameterType="mvc.dto.Meeting_guest">
+			INSERT INTO meeting_guest VALUES (#{meeting_no}, #{u_id})
+	</insert>
+	<select id="getCurrentMeeting"
+			parameterType="mvc.dto.Groups"
+			resultType="mvc.dto.Meeting_reservation">
+			SELECT * FROM (SELECT * FROM meeting_reservation WHERE group_no = #{group_no} ORDER BY meeting_no DESC) WHERE ROWNUM=1
+	</select>
+	<select id="getMeetingInfo"
+			parameterType="mvc.dto.Meeting_reservation"
+			resultType="mvc.dto.Meeting_reservation">
+			SELECT * FROM meeting_reservation WHERE meeting_no = #{meeting_no}
+	</select>
+	<select id="getPlaceList"
+			resultType="mvc.dto.Place">
+			SELECT * FROM place
+	</select>
+	<insert id="insertMeeting"
+			parameterType="mvc.dto.Meeting_reservation">
+			INSERT INTO meeting_reservation(meeting_no, rstart, rend, reservation_location, personnel, group_no, status, guest, res_day, fee) VALUES(meeting_no_seq.nextval, #{rstart}, #{rend}, #{reservation_location}, #{personnel}, #{group_no}, #{status}, 0, #{res_day}, #{fee})
+	</insert>
+	<insert id="insertUserble"
+			parameterType="mvc.dto.Place">
+			INSERT INTO com_userble (pla_no, u_id, personnel, rstart, rend, reserDate, meeting_no) VALUES (#{pla_no}, #{u_id}, #{personnel}, #{rstart}, #{rend}, #{reserDate}, #{meeting_no})
+	</insert>
+	<update id="updateMeeting"
+			parameterType="mvc.dto.Meeting_reservation">
+			UPDATE meeting_reservation SET guest = guest + 1 WHERE meeting_no = #{meeting_no}
+	</update>
+	<delete id="deleteMeeting"
+			parameterType="mvc.dto.Meeting_reservation">
+			DELETE FROM meeting_reservation WHERE meeting_no = #{meeting_no}
+	</delete>
+</mapper>

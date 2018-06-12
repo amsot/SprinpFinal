@@ -37,4 +37,21 @@ public class CompanyServiceImpl implements CompanyService{
 		return false;
 	}
 
+
+//	//회원정보 수정
+	@Override
+	public void comupdate(Company company) {
+		
+		 com.comupdate(company);
+		
+	}
+
+	@Override
+	public Company getCompanyInfo(Company company) {
+		
+		return com.getCompanyInfo(company);
+	
+}
+
+
 }

@@ -17,7 +17,7 @@
 		if($("#com_id").val() == null || $("#com_id").val() ==""){
 			alert("아이디를 입력하세요");
 			$("#com_id").focus();
-			return;
+			return ;
 		}else{
 			id = $("#com_id").val();
 			$.ajax({
@@ -39,6 +39,7 @@
 					console.log(request.responseText);
 					console.log(error.printStackTrace);
 				}
+				
 					
 			});
 		}
@@ -85,7 +86,8 @@
 			<table width="550" align="center"  cellpadding="5">
 			<tr>
 				<td height="40" align="center"><strong>아이디 : </strong></td>
-				<td><input type="text" name="com_id" id="com_id"> &nbsp; <button class="btn btn-primary" id=idcheck>중복확인</button><br></td>
+				<td><input type="text" name="com_id" id="com_id"> &nbsp; <input type="button" class="btn btn-primary" id=idcheck value="중복확인"><br></td>
+
 			</tr>
 			<tr>
 				<td height="40" align="center"><strong>패스워드 : </strong></td>

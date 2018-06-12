@@ -43,7 +43,7 @@
     </select>
     </div>
     <br><br>
-  <input class="search" type="submit">
+  <button class="btn btn-common log-btn">검색</button>
 </form>
 
 <!-- JSTL List 받아와서 for문 -->
@@ -228,26 +228,4 @@ $(function() {
          }
     });
 });
-
-/* console로 대분류, 소분류, 시/도 선택, 시/군/구 선택 */
-$(document).ready(function(){
-    $("#main_cat").on("change", function(){
-        console.log($(this).find("option[value='" + $(this).val() + "']").text());
-    });
-});
-$(document).ready(function(){
-    $("#small_cat").on("change", function(){
-        console.log($(this).find("option[value='" + $(this).val() + "']").text());
-    });
-});
-$(document).ready(function(){
-    $("#location").on("change", function(){
-        console.log($(this).find("option[value='" + $(this).val() + "']").text());
-    });
-});
-$(document).ready(function(){
-    $("#location_cat").on("change", function(){
-        console.log($(this).find("option[value='" + $(this).val() + "']").text());
-    });
-}); 
 </script>

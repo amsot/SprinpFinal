@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mvc.dao.CompanyDao">
+<resultMap type="mvc.dto.Company" id="Company">
+		<result property="com_no" column="com_no"/>
+		<result property="com_id" column="com_id"/>
+		<result property="com_pw" column="com_pw"/>
+		<result property="com_name" column="com_name"/>
+		<result property="com_phone" column="com_phone"/>
+		<result property="com_email" column="com_email"/>
+		
+	
+	</resultMap>
 
 <insert id="join" parameterType="mvc.dto.Company">
 	INSERT INTO company ( com_no, com_id,  com_pw,  com_name,  com_phone, com_email) 
@@ -14,6 +24,12 @@
 <select id="getOneCompany" parameterType="mvc.dto.Company" resultType="int">
 	SELECT COUNT(*) FROM COMPANY WHERE com_id = #{com_id}
 </select>
+<select id="getCompanyInfo" parameterType="mvc.dto.Company" resultMap="Company" >
+	SELECT com_no, com_id,  com_pw,  com_name,  com_phone, com_email FROM COMPANY WHERE com_id = #{com_id}
+</select>
 
+<update id="comupdate" parameterType="mvc.dto.Company" >
+	update company set com_pw=#{com_pw}, com_name=#{com_name}, com_phone=#{com_phone},com_email=#{com_email} where com_id=#{com_id} 
+</update>
 
 </mapper>

@@ -12,4 +12,9 @@ public interface CompanyDao {
 
 	//회원정보 가져오기 
 	public int getOneCompany(Company company);
+
+	//회원정보 수정시 정보 가져오기 
+	public Company getCompanyInfo(Company company);
+	//회원정보 수정
+	public void comupdate(Company company);
 }

@@ -2,15 +2,14 @@ package mvc.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import mvc.dao.MemberDao;
+import mvc.dao.UsermemberDao;
 import mvc.dto.Writer;
 
 @Service
 public class MemberServiceImpl implements MemberService{
 
 	//의존성 주입 
-	@Autowired MemberDao m;
+	@Autowired UsermemberDao m;
 	
 	//회원가입 처리 
 	@Override

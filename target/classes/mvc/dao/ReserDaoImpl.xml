@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mvc.dao.ReserDao">
+	
+	<resultMap type="mvc.dto.Reser" id="Reser">
+		<result property="pla_no" column="pla_no"/>
+		<result property="u_id" column="u_id"/>
+		<result property="personnel" column="personnel"/>
+		<result property="rstart" column="rstart"/>
+		<result property="rend" column="rend"/>
+			
+	</resultMap>
+	
+	<select id="getReserList" resultMap="Reser" parameterType="mvc.dto.Reser">
+	select u_id,personner, rstart, rend, reserDate from com_userble where pla_no =#{pla_no}
+	</select>
+	</mapper>

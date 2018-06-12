@@ -40,10 +40,7 @@ private static final Logger logger = LoggerFactory.getLogger(MygroupController.c
 	public void viewMygroup(Mygroup mygroup, Model model, User user, HttpSession session) {
 		logger.info("상세보기 폼 활성화");
 		model.addAttribute("mygroup", mygroupService.getViewMygroup(mygroup));
-		
 		logger.info(mygroup.toString());
-
-		
 	}
 	
 	@RequestMapping(value="/mygroup/groupRegistration.do", method=RequestMethod.GET)
@@ -65,10 +62,6 @@ private static final Logger logger = LoggerFactory.getLogger(MygroupController.c
 		logger.info("모임삭제 활성화");
 		logger.info(mygroup.toString());
 		mygroupService.mygroupDelete(mygroup);
-		
 		return "redirect:/mygroup/mygroup.do";
 	}
-	
-	
-	
 }
